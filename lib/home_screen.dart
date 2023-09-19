@@ -18,11 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
       position: LatLng(31.582045, 74.329376),
       infoWindow: InfoWindow(title: 'My position'),
     ),
-     const Marker(
-      markerId: MarkerId('2'),
-      position: LatLng(30.3753, 69.3451),
-      infoWindow: InfoWindow(title: 'Pakistan'),
-    ),
+    const Marker(
+        markerId: MarkerId('2'),
+        position: LatLng(25.42796133580664, 80.885749655962),
+        infoWindow: InfoWindow(
+          title: 'nepal',
+        )),
   ];
   final Completer<GoogleMapController> _controller = Completer();
   static const CameraPosition _kGooglePlex = CameraPosition(
@@ -42,15 +43,29 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: const Text('Google map '),
       ),
-      body: GoogleMap(
-        markers: Set<Marker>.of(_marker),
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
+      body: SafeArea(
+        child: GoogleMap(
+          markers: Set<Marker>.of(_marker),
+          initialCameraPosition: _kGooglePlex,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+          myLocationEnabled: true,
+          mapType: MapType.normal,
+          compassEnabled: true,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          GoogleMapController controller = await _controller.future;
+          controller.animateCamera(
+            CameraUpdate.newCameraPosition(
+              const CameraPosition(
+                  target: LatLng(31.582045, 74.329376), ),
+            ),
+          );
         },
-        myLocationEnabled: true,
-        mapType: MapType.normal,
-        compassEnabled: true,
+        child: const Icon(Icons.location_disabled_outlined),
       ),
     );
   }
