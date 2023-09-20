@@ -18,11 +18,22 @@ class _HomeScreenState extends State<HomeScreen> {
       position: LatLng(31.582045, 74.329376),
       infoWindow: InfoWindow(title: 'My position'),
     ),
+     const Marker(
+      markerId: MarkerId('2'),
+      position: LatLng(31.582045,74.329376),
+      infoWindow: InfoWindow(title: 'Lahore Pakistan'),
+    ),
     const Marker(
-        markerId: MarkerId('2'),
-        position: LatLng(25.42796133580664, 80.885749655962),
+        markerId: MarkerId('3'),
+        position: LatLng(31.5883, 74.3105),
         infoWindow: InfoWindow(
-          title: 'nepal',
+          title: 'Badshahi mosque',
+        )),
+    const Marker(
+        markerId: MarkerId('4'),
+        position: LatLng(31.6018, 74.3206),
+        infoWindow: InfoWindow(
+          title: 'Badami Bagh Lahore',
         )),
   ];
   final Completer<GoogleMapController> _controller = Completer();
